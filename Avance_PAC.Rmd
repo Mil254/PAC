@@ -1,0 +1,233 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+---
+title: "Visión Global del Desarrollo Humano: Evolución de la Esperanza de Vida (1952–2007)"
+author: |
+  | Efraín Carlos Balbuena Cárdenas
+  | Hanghell Cornejo Rodríguez
+  | Johana Guadalupe Milagros Inga Gamarra
+  | Roger Guerra Quispe
+date: "2026-05-15"
+
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: false
+    self_contained: true
+
+---
+
+# Objetivo del Dashboard
+
+## Objetivo
+
+Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la relación entre el PIB per cápita y la esperanza de vida, considerando además el tamaño poblacional y las diferencias regionales, con el fin de identificar patrones de desarrollo económico y avances en salud pública.
+
+## Enlaces del Proyecto
+
+### Dashboard publicado
+
+https://johanaiga.shinyapps.io/Avance_PAC/
+
+### Repositorio GitHub
+
+https://github.com/Mil254/Avance_PAC
+
+---
+
+# Características de la Base de Datos
+
+## Dataset utilizado
+
+El dashboard utiliza información histórica proveniente de la base de datos Gapminder, la cual contiene indicadores demográficos y económicos de diversos países alrededor del mundo entre 1952 y 2007.
+
+---
+
+# Variables Utilizadas
+
+| Variable | Descripción | Tipo de Variable | Unidad |
+|---|---|---|---|
+| País | Nombre del país | Categórica | - |
+| Continente | Continente al que pertenece el país | Categórica | - |
+| Año | Año de la observación | Cuantitativa discreta | - |
+| Esperanza_de_vida | Promedio de años de vida al nacer | Cuantitativa continua | Años |
+| Población | Número total de habitantes | Cuantitativa continua | Personas |
+| PIB_per_cápita | PIB dividido por población total | Cuantitativa continua | Miles de dólares |
+| PIB_total | Producto Interno Bruto total | Cuantitativa continua | Miles de dólares |
+
+---
+
+# Descripción del Dashboard
+
+## Descripción general
+
+El dashboard fue desarrollado utilizando R, Shiny y shinydashboard con el objetivo de facilitar el análisis visual e interactivo de la evolución de la esperanza de vida y del crecimiento económico mundial.
+
+La aplicación integra gráficos dinámicos, filtros interactivos y tablas descriptivas que permiten explorar los datos históricos por continente, país y periodo temporal.
+
+---
+
+# Tecnologías Utilizadas
+
+## Herramientas implementadas
+
+- R
+- Shiny
+- shinydashboard
+- ggplot2
+- plotly
+- DT
+- dplyr
+- gapminder
+- gganimate
+
+---
+
+# Funcionalidades Principales
+
+## Filtros Globales
+
+El dashboard incorpora filtros interactivos para:
+
+- Selección de continentes
+- Selección de países
+- Selección de periodos temporales
+
+Esto permite realizar exploraciones dinámicas y personalizadas de los datos.
+
+---
+
+# Funcionalidades Principales
+
+## Gráfico de Burbujas Animado
+
+El gráfico de burbujas animado constituye uno de los componentes principales del dashboard.
+
+### Variables representadas
+
+- Eje X: PIB per cápita
+- Eje Y: Esperanza de vida
+- Tamaño de burbuja: población
+- Color: continente
+- Animación: evolución temporal entre 1952 y 2007
+
+Este gráfico permite visualizar la evolución simultánea del desarrollo económico y la salud pública.
+
+---
+
+# Funcionalidades Principales
+
+## Estadísticas Descriptivas
+
+El dashboard incorpora herramientas estadísticas como:
+
+- Histogramas
+- Boxplots
+- Comparaciones por continente
+- Tablas descriptivas
+
+Estas visualizaciones permiten identificar patrones, dispersión y diferencias regionales.
+
+---
+
+# Funcionalidades Principales
+
+## Tablas Interactivas
+
+Las tablas desarrolladas con DT permiten:
+
+- Filtrar información
+- Ordenar variables
+- Buscar registros específicos
+- Descargar información
+
+Esto facilita la exploración y portabilidad de los datos.
+
+---
+
+# Capturas del Dashboard
+
+## Página principal
+
+```{r echo=FALSE, out.width='90%'}
+knitr::include_graphics("captura_inicio.png")
+```
+
+---
+
+# Capturas del Dashboard
+
+## Gráfico animado
+
+```{r echo=FALSE, out.width='90%'}
+knitr::include_graphics("captura_burbujas.png")
+```
+
+---
+
+# Capturas del Dashboard
+
+## Estadísticas descriptivas
+
+```{r echo=FALSE, out.width='90%'}
+knitr::include_graphics("captura_estadisticas.png")
+```
+
+---
+
+# Ventajas del Dashboard
+
+- Interactividad y exploración dinámica mediante filtros globales.
+
+- Visualización intuitiva de tendencias históricas mediante gráficos animados.
+
+- Comparación multidimensional entre países y continentes.
+
+- Incorporación de herramientas estadísticas descriptivas.
+
+- Posibilidad de descarga y consulta dinámica de datos.
+
+---
+
+# Limitaciones
+
+- Restricción temporal al periodo 1952–2007.
+
+- Simplificación del análisis a tres variables principales.
+
+- Dependencia de la calidad de los datos de Gapminder.
+
+- Necesidad de conocimientos básicos de interpretación estadística.
+
+---
+
+## Agenda pendiente
+
+- Ranking Top 10 de países con mayor esperanza de vida.
+
+- Nuevos gráficos animados con Plotly.
+
+- Implementación de análisis de correlación y regresión.
+
+- Incorporación de nuevas variables socioeconómicas.
+
+---
+
+# Conclusiones
+
+El dashboard permite analizar de manera interactiva la evolución histórica del bienestar humano global.
+
+La integración de herramientas visuales y estadísticas facilita la comprensión de la relación entre crecimiento económico y esperanza de vida, evidenciando diferencias regionales y patrones de desarrollo humano.
+
+Asimismo, el proyecto demuestra el potencial de R y Shiny para la construcción de sistemas interactivos de análisis de datos.
+
+---
+
+# Referencia Bibliográfica
+
+Gapminder Foundation. (s. f.). *Gapminder Data*. Recuperado de: https://www.gapminder.org/data/
+
+
