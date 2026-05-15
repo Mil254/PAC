@@ -1,0 +1,13 @@
+name: Avance_PAC
+title: Avance_PAC
+username: johanaiga
+account: johanaiga
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17365366
+bundleId: 11996932
+url: https://johanaiga.shinyapps.io/Avance_PAC/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData

@@ -1,0 +1,13 @@
+name: PAC_Grupo4
+title: PAC_Grupo4
+username: johanaiga
+account: johanaiga
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17365304
+bundleId:
+url: https://johanaiga.shinyapps.io/PAC_Grupo4/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData
