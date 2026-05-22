@@ -17,19 +17,19 @@ mediante visualizaciones dinámicas e interactivas.
 
 # Dashboard Publicado
 
-🔗 https://johanaiga.shinyapps.io/Avance_PAC/
+🔗 https://johanaiga.shinyapps.io/PAC_Grupo4/
 
 ---
 
 # Presentación RPubs
 
-🔗 https://rpubs.com/JohanaIGA/dashboard-shiny-gapminder
+🔗 https://rpubs.com/JohanaIGA/shiny-gapminder
 
 ---
 
 # Repositorio GitHub
 
-🔗 https://github.com/Mil254/Avance_PAC
+🔗 https://github.com/Mil254/PAC
 
 ---
 
@@ -49,7 +49,9 @@ Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la
 - DT
 - dplyr
 - gapminder
-- gganimate
+- leaflet
+- scales
+- maps
 
 ---
 
