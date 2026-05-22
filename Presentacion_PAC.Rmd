@@ -1,0 +1,310 @@
+---
+title: 'Visión Global del Desarrollo Humano: Evolución de la Esperanza de Vida (1952–2007)'
+author: |
+  | Efraín Carlos Balbuena Cárdenas
+  | Hanghell Cornejo Rodríguez
+  | Johana Guadalupe Milagros Inga Gamarra
+  | Roger Guerra Quispe
+date: "23 de mayo de 2026"
+output: 
+  revealjs::revealjs_presentation:
+    css: estilos.css
+    theme: simple
+    transition: fade
+    center: false
+    self_contained: false
+    reveal-options:
+      width: 1100
+      height: 700
+      margin: 0.1
+    
+---
+```{r setup, include=FALSE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(gapminder)
+library(scales)
+
+data(gapminder)
+
+continent_colors <- c(
+  "Africa"   = "#E74C3C",
+  "Americas" = "#3498DB",
+  "Asia"     = "#F39C12",
+  "Europe"   = "#2ECC71",
+  "Oceania"  = "#9B59B6"
+)
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+
+
+## Objetivo del dashboard
+
+Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la relación entre el PIB per cápita y la esperanza de vida, considerando además el tamaño poblacional y las diferencias regionales, con el fin de identificar patrones de desarrollo económico y avances en salud pública.
+
+---
+### Enlace al repositorio de GitHub
+<https://github.com/Mil254/Avance_PAC>
+
+### Enlace al dashboard en ShinyApps
+<https://johanaiga.shinyapps.io/PAC_Grupo4/>
+
+
+## Características de la base de datos (Gapminder)
+
+| Variable | Descripción | Tipo de Variable | Unidad |
+|----|----|----|----|
+| País | Nombre del país | Categórica | - |
+| Continente | Continente al que pertenece el país | Categórica | - |
+| Año | Año de la observación | Cuantitativa discreta | - |
+| Esperanza_de_vida | Promedio de años de vida al nacer | Cuantitativa continua | Años |
+| Población | Número total de habitantes | Cuantitativa continua | Personas |
+| PBI_per_cápita | PIB dividido por población total | Cuantitativa continua | Miles de dólares |
+
+
+## Evolución de la Esperanza de Vida por Continente
+
+```{r}
+df_vida <- gapminder %>%
+  group_by(year, continent) %>%
+  summarise(lifeExp = mean(lifeExp), .groups = "drop")
+
+p1 <- ggplot(df_vida,
+             aes(x = year,
+                 y = lifeExp,
+                 color = continent,
+                 group = continent,
+                 text = paste(
+                   "Continente:", continent,
+                   "<br>Año:", year,
+                   "<br>Esperanza de vida:", round(lifeExp,1)
+                 ))) +
+  geom_line(size = 1.5) +
+  geom_point(size = 3) +
+  scale_color_manual(values = continent_colors) +
+  labs(
+    subtitle = "Promedio por continente (1952-2007)",
+    x = "Año",
+    y = "Esperanza de Vida"
+  ) +
+  theme_minimal(base_size = 14)
+
+ggplotly(p1, tooltip = "text")
+```
+
+## PIB per Cápita vs Esperanza de Vida
+
+```{r}
+df_bubble <- gapminder
+
+plot_ly(
+  df_bubble,
+  x = ~gdpPercap,
+  y = ~lifeExp,
+  size = ~pop,
+  color = ~continent,
+  colors = continent_colors,
+  frame = ~year,
+  type = "scatter",
+  mode = "markers",
+  text = ~paste(
+    "País:", country,
+    "<br>Año:", year,
+    "<br>PIB:", dollar(gdpPercap),
+    "<br>Esperanza de vida:", round(lifeExp,1),
+    "<br>Población:", comma(pop)
+  ),
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(
+      title = "PIB per Cápita",
+      type = "log"
+    ),
+    yaxis = list(
+      title = "Esperanza de Vida"
+    )
+  )
+```
+## Distribución de la esperanza de vida por continente
+
+```{r}
+df_box <- gapminder %>%
+  filter(year == 2007)
+
+p5 <- ggplot(df_box,
+             aes(x = continent,
+                 y = lifeExp,
+                 fill = continent,
+                 text = paste(
+                   "País:", country,
+                   "<br>Esperanza de vida:", round(lifeExp,1)
+                 ))) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = continent_colors) +
+  labs(
+    title = "Distribución de la Esperanza de Vida",
+    subtitle = "Comparación entre continentes - 2007",
+    x = "Continente",
+    y = "Esperanza de Vida"
+  ) +
+  theme_minimal(base_size = 14)
+
+ggplotly(p5, tooltip = "text")
+```
+
+## Heatmap de correlaciones
+
+```{r}
+library(reshape2)
+
+corr <- gapminder %>%
+  select(lifeExp, gdpPercap, pop, year) %>%
+  cor()
+
+corr_melt <- melt(corr)
+
+p6 <- ggplot(corr_melt,
+             aes(x = Var1,
+                 y = Var2,
+                 fill = value,
+                 text = paste(
+                   Var1, "vs", Var2,
+                   "<br>Correlación:", round(value,3)
+                 ))) +
+  geom_tile() +
+  geom_text(aes(label = round(value,2)),
+            color = "white",
+            size = 5) +
+  scale_fill_gradient2(
+    low = "#E74C3C",
+    mid = "#2C3E50",
+    high = "#2ECC71",
+    midpoint = 0
+  ) +
+  labs(
+    x = "",
+    y = ""
+  ) +
+  theme_minimal(base_size = 14)
+
+ggplotly(p6, tooltip = "text")
+```
+
+
+## Top 15 países con mayor esperanza de vida
+
+```{r}
+df_top <- gapminder %>%
+  filter(year == 2007) %>%
+  arrange(desc(lifeExp)) %>%
+  head(15)
+
+p4 <- ggplot(df_top,
+             aes(x = reorder(country, lifeExp),
+                 y = lifeExp,
+                 fill = lifeExp,
+                 text = paste(
+                   "País:", country,
+                   "<br>Esperanza de vida:", round(lifeExp,1)
+                 ))) +
+  geom_col() +
+  coord_flip() +
+  scale_fill_gradient(low = "#A9DFBF", high = "#2ECC71") +
+  labs(
+    x = "",
+    y = "Esperanza de Vida"
+  ) +
+  theme_minimal(base_size = 14)
+
+ggplotly(p4, tooltip = "text")
+
+# Preparación de datos
+tabla_gapminder <- gapminder %>%
+  mutate(
+    gdpPercap = round(gdpPercap, 1),
+    lifeExp   = round(lifeExp, 1)
+  ) %>%
+  rename(
+    País               = country,
+    Continente         = continent,
+    Año                = year,
+    `Esperanza de Vida`= lifeExp,
+    `PIB per Cápita`   = gdpPercap,
+    Población          = pop
+  )
+```
+
+## Exploración del dataset
+```{r}
+
+# Preparación de datos
+tabla_gapminder <- gapminder %>%
+  mutate(
+    gdpPercap = round(gdpPercap, 1),
+    lifeExp   = round(lifeExp, 1)
+  ) %>%
+  rename(
+    País                = country,
+    Continente          = continent,
+    Año                 = year,
+    `Esperanza de Vida` = lifeExp,
+    `PIB per Cápita`    = gdpPercap,
+    Población           = pop
+  )
+
+# Tabla interactiva
+DT::datatable(
+  tabla_gapminder,
+  filter = "top",
+  extensions = "Buttons",
+  options = list(
+    pageLength = 10,
+    scrollX = TRUE,
+    dom = "Bfrtip",
+    buttons = c("copy", "csv", "excel", "pdf")
+  ),
+  class = "stripe hover compact"
+) %>%
+  DT::formatCurrency(
+    "PIB per Cápita",
+    currency = "$",
+    digits = 1
+  ) %>%
+  DT::formatStyle(
+    "Esperanza de Vida",
+    background = DT::styleColorBar(
+      range(tabla_gapminder$`Esperanza de Vida`),
+      "#2ECC71"
+    ),
+    backgroundSize = "100% 85%",
+    backgroundRepeat = "no-repeat",
+    backgroundPosition = "center"
+  )
+```
+
+## Conclusiones
+
+### Ventajas del dashboard
+
+- Interactividad y exploración dinámica mediante filtros globales.
+- Visualización intuitiva de tendencias históricas mediante gráficos animados.
+- Comparación multidimensional entre países y continentes.
+- Incorporación de herramientas estadísticas descriptivas.
+- Posibilidad de descarga y consulta dinámica de datos.
+
+### Limitaciones
+
+- Necesidad de conocimientos básicos de interpretación estadística.
+- Simplificación del análisis a tres variables principales.
+- Restricción temporal al periodo 1952–2007.
+
+## Referencias bibliográficas
+Gapminder Foundation. (s. f.). Gapminder Data. Recuperado de: https://www.gapminder.org/data/

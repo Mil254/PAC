@@ -1,0 +1,223 @@
+---
+title: "A Structured Approach to Beamer Design"
+subtitle: "Clarity, restraint, and consistency in presentation decks"
+author: |
+  | *Integrante 1:* Johana Inga
+  | *Integrante 2:* Alexander G.
+  | *Integrante 3:* Kevin Gamarra
+date: "21 de mayo, 2026"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    transition: fade
+    center: false      
+    self_contained: true
+    reveal_options:
+      width: 1100      
+      height: 700
+      margin: 0.1
+---
+
+```{css, echo=False, id="css_personalizado"}
+/* GRIS PLATINO CORPORATIVO */
+:root {
+    --primary-color: #4a5568;   
+    --secondary-color: #718096; 
+    --bg-color: #fafafa;        
+    --text-color: #2d3748;      
+    --light-accent: #e2e8f0;    
+}
+
+/* Forzar fondos claros en toda la estructura de RevealJS */
+.reveal, .reveal .slides, .reveal .backgrounds, .reveal .slide-background {
+    background: var(--bg-color) !important;
+}
+
+/* ==========================================
+   PORTADA O CARÁTULA INTOCABLE
+   ========================================== */
+.reveal .slides section:first-of-type,
+.reveal .slides section.title-slide {
+    background: #ffffff !important;
+    padding: 20px 40px 20px 120px !important; /* Margen para no pisar la barra ploma */
+    text-align: left !important;
+    box-sizing: border-box !important;
+    height: 100% !important;
+    top: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+/* Forzar la barra lateral ploma encima de todo */
+.reveal .slides section:first-of-type::before,
+.reveal .slides section.title-slide::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -10% !important;
+    left: 0 !important;
+    width: 45px !important; /* Grosor de la barra ploma de la captura */
+    height: 120% !important;
+    background-color: var(--primary-color) !important;
+    z-index: 10 !important;
+    display: block !important;
+}
+
+/* Forzar alineación a la izquierda y evitar cortes */
+.reveal .slides section:first-of-type * {
+    text-align: left !important;
+    margin-left: 0 !important;
+    white-space: normal !important; /* Evita que la universidad se corte */
+}
+
+/* Título */
+.reveal .slides section:first-of-type h1.title {
+    color: var(--primary-color) !important;
+    font-size: 1.5em !important;
+    font-weight: 700 !important;
+    margin-bottom: 15px !important;
+    text-shadow: none !important;
+}
+
+/* Subtítulo */
+.reveal .slides section:first-of-type p.subtitle {
+    color: var(--secondary-color) !important;
+    font-size: 0.9em !important;
+    margin-bottom: 40px !important;
+}
+
+/* Autores / Integrantes */
+.reveal .slides section:first-of-type p.author {
+    color: var(--text-color) !important;
+    font-size: 0.25em !important;
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;
+}
+
+/* UNIVERSIDAD (Forzado completo sin importar el largo) */
+.reveal .slides section:first-of-type .institucion {
+    color: var(--secondary-color) !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-top: 15px !important;
+    font-size: 0.95em !important;
+    width: 100% !important;
+}
+
+/* Fecha */
+.reveal .slides section:first-of-type p.date {
+    color: var(--secondary-color) !important;
+    font-size: 0.10em !important;
+    margin-top: 10px !important;
+}
+
+/* ==========================================
+   DIAPOSITIVAS DE CONTENIDO JUSTIFICADAS
+   ========================================== */
+.reveal .slides section:not(:first-of-type) {
+    padding: 40px 60px !important;
+    text-align: left !important;
+}
+
+.reveal .slides section h2 {
+    color: var(--primary-color) !important;
+    font-size: 1.2em !important;
+    border-bottom: 2px solid var(--light-accent) !important; /* Línea ploma */
+    padding-bottom: 8px !important;
+    margin-bottom: 20px !important;
+    text-transform: none !important;
+    text-align: left !important;
+}
+
+.reveal .slides section h3 {
+    color: var(--secondary-color) !important;
+    font-size: 0.9em !important;
+    text-transform: none !important;
+    text-align: left !important;
+}
+
+.reveal .slides section p,
+.reveal .slides section li {
+    font-size: 0.75em !important;
+    line-height: 1.5 !important;
+    text-align: justify !important; /* Justificado activo */
+}
+
+.reveal .slides section ul, 
+.reveal .slides section ol {
+    margin-left: 1.2em !important;
+}
+
+.reveal .slides section ul li::marker {
+    color: var(--secondary-color) !important;
+}
+
+.reveal .plotly html-widget {
+  width: 100% !important;
+  height: 650px !important;
+}
+
+.reveal .dt-buttons {
+  margin-bottom: 10px;
+}
+
+.reveal .dt-buttons .dt-button {
+  padding: 4px 10px !important;
+  font-size: 11px !important;
+  border-radius: 6px !important;
+  background-color: #2C3E50 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.reveal .dt-buttons .dt-button:hover {
+  background-color: #1ABC9C !important;
+}
+
+.reveal table.dataTable {
+  font-size: 14px;
+}
+
+/* TABLA */
+.reveal table.dataTable {
+  font-size: 13px !important;
+}
+
+/* TEXTO: showing entries */
+.reveal .dataTables_info {
+  font-size: 11px !important;
+  color: #cccccc !important;
+}
+
+/* PAGINACIÓN */
+.reveal .dataTables_paginate {
+  font-size: 11px !important;
+}
+
+/* BOTONES DE PAGINACIÓN */
+.reveal .paginate_button {
+  padding: 2px 8px !important;
+  margin: 2px !important;
+  border-radius: 4px !important;
+}
+
+/* BUSCADOR */
+.reveal .dataTables_filter label {
+  font-size: 11px !important;
+}
+
+.reveal .dataTables_filter input {
+  font-size: 11px !important;
+  padding: 3px !important;
+}
+
+/* SELECTOR DE FILAS */
+.reveal .dataTables_length label {
+  font-size: 11px !important;
+}
+
+.reveal .dataTables_length select {
+  font-size: 11px !important;
+  padding: 2px !important;
+}
