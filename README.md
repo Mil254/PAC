@@ -15,19 +15,19 @@ mediante visualizaciones dinámicas e interactivas.
 
 ---
 
-# Dashboard Publicado
+## Dashboard Publicado
 
 🔗 https://johanaiga.shinyapps.io/PAC_Grupo4/
 
 ---
 
-# Presentación RPubs
+## Presentación RPubs
 
 🔗 https://rpubs.com/JohanaIGA/shiny-gapminder
 
 ---
 
-# Repositorio GitHub
+## Repositorio GitHub
 
 🔗 https://github.com/Mil254/PAC
 
@@ -75,6 +75,11 @@ Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la
 
 ---
 
+## Video demostrativo
+
+[Ver demo del dashboard](Demo_dashborad.mp4)
+
+---
 # Funcionalidades
 
 - Filtros interactivos por país y continente
