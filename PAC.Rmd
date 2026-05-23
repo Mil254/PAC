@@ -82,7 +82,8 @@ La aplicación integra gráficos dinámicos, filtros interactivos y tablas descr
 - DT
 - dplyr
 - gapminder
-- gganimate
+- leaflet
+- maps
 
 ---
 
@@ -201,18 +202,6 @@ knitr::include_graphics("captura_estadisticas.png")
 - Dependencia de la calidad de los datos de Gapminder.
 
 - Necesidad de conocimientos básicos de interpretación estadística.
-
----
-
-## Agenda pendiente
-
-- Ranking Top 10 de países con mayor esperanza de vida.
-
-- Nuevos gráficos animados con Plotly.
-
-- Implementación de análisis de correlación y regresión.
-
-- Incorporación de nuevas variables socioeconómicas.
 
 ---
 
