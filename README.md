@@ -59,19 +59,19 @@ Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la
 
 ## Página principal
 
-![Inicio](captura_inicio.png)
+![Inicio](img/captura_inicio.png)
 
 ---
 
 ## Gráfico de burbujas animado
 
-![Burbujas](captura_burbujas.png)
+![Burbujas](img/captura_burbujas.png)
 
 ---
 
 ## Estadísticas descriptivas
 
-![Estadísticas](captura_estadisticas.png)
+![Estadísticas](img/captura_estadisticas.png)
 
 ---
 
