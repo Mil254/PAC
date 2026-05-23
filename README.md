@@ -77,7 +77,7 @@ Analizar la evolución del bienestar humano global entre 1952 y 2007 mediante la
 
 ## Video demostrativo
 
-[![Ver demo](dashboard.png)](./Demo_Dashboard.mp4)
+[Ver video demostrativo](https://www.youtube.com/watch?v=DAvZgghcBjM)
 
 ---
 # Funcionalidades
